@@ -63,21 +63,13 @@ export function ResultsDashboard({
             <h1 className={cx("mt-1 text-3xl font-semibold uppercase leading-none tracking-tightest", TIER_TONE[tier.tone])}>
               {tier.name}
             </h1>
-            <p className="mt-2 text-sm font-medium text-fg">{tier.desc}</p>
           </div>
         </div>
         <div className="mt-4">
           <FacialOverlay imageUrl={imageUrl} overlay={result.overlay} isDemo={result.isDemo} />
         </div>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <button onClick={onRestart} className="btn-ghost">Analyze another photo</button>
-          <button
-            onClick={onDelete}
-            className="btn border border-signal-low/30 text-signal-low hover:bg-signal-low/10"
-          >
-            Delete my analysis
-          </button>
-        </div>
+        {/* Rating description under the photo (the buttons now live lower down). */}
+        <p className="mt-4 text-sm leading-relaxed text-fg">{tier.desc}</p>
       </div>
 
       {/* ---- Profile header (desktop) ---- */}
@@ -223,13 +215,18 @@ export function ResultsDashboard({
         </div>
       </section>
 
+      {/* ---- Actions (mobile) — moved down the page, below the results ---- */}
+      <div className="mt-12 flex flex-wrap gap-3 lg:hidden">
+        <button onClick={onRestart} className="btn-ghost">Analyze another photo</button>
+        <button
+          onClick={onDelete}
+          className="btn border border-signal-low/30 text-signal-low hover:bg-signal-low/10"
+        >
+          Delete my analysis
+        </button>
+      </div>
+
       <div className="mt-12">
         <Disclaimer>
           BP CLUB does not diagnose medical conditions or determine objective
-          attractiveness, worth, health or genetic quality from a photograph. For
-          cosmetic procedures, consult an appropriately qualified professional.
-        </Disclaimer>
-      </div>
-    </div>
-  );
-}
+          attractiveness, worth, health or genetic qu
