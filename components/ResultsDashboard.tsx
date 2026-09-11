@@ -40,9 +40,15 @@ export function ResultsDashboard({
   return (
     <div className="animate-fade-in">
       {/* ---- Profile header ---- */}
-      <div className="card grid gap-8 p-7 sm:p-10 lg:grid-cols-[auto_1fr] lg:items-center">
+      <div className="card grid gap-6 p-7 sm:gap-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:items-center">
         <div className="flex justify-center">
           <ScoreRing score={result.overallScore} confidence={result.overallConfidence} />
+        </div>
+        {/* On mobile, show the rated photo right beside the score so the
+            rating and the photo it came from stay on the same screen. Hidden
+            on desktop, which uses the full Facial Map section further down. */}
+        <div className="lg:hidden">
+          <FacialOverlay imageUrl={imageUrl} overlay={result.overlay} isDemo={result.isDemo} />
         </div>
         <div>
           <div className="flex flex-wrap items-center gap-3">
@@ -78,8 +84,8 @@ export function ResultsDashboard({
         </div>
       </div>
 
-      {/* ---- Facial map ---- */}
-      <section className="mt-12">
+      {/* ---- Facial map (desktop; on mobile it appears beside the score above) ---- */}
+      <section className="mt-12 hidden lg:block">
         <SectionTitle eyebrow="Facial Map" title="Your landmark visualization" />
         <div className="mt-6">
           <FacialOverlay imageUrl={imageUrl} overlay={result.overlay} isDemo={result.isDemo} />
