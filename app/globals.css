@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  color-scheme: dark;
+}
+
+/* Scale the whole rem-based UI up (~like a 112.5% browser zoom) so the layout
+   fills wide screens and reads larger. Nudge this value to taste. */
+html {
+  font-size: 112.5%;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  background-color: #050506;
+  color: #f3f3f5;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-image:
+    radial-gradient(60rem 40rem at 78% -10%, rgba(124, 92, 255, 0.10), transparent 60%),
+    radial-gradient(50rem 40rem at -10% 10%, rgba(124, 92, 255, 0.05), transparent 55%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.3);
+  color: #fff;
+}
+
+/* Thin technical scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #26262f;
+  border-radius: 8px;
+  border: 2px solid #0a0a0c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #33333f;
+}
+
+@layer components {
+  /* Small uppercase technical label */
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-label text-fg-faint;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-ink-800/70 backdrop-blur-sm;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:border-line-strong hover:bg-ink-700/70;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium
+           transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white shadow-[0_0_0_1px_rgba(124,92,255,0.5)]
+           hover:bg-accent-soft hover:shadow-[0_8px_30px_-8px_rgba(124,92,255,0.7)];
+  }
+  .btn-ghost {
+    @apply btn border border-line text-fg hover:border-line-strong hover:bg-ink-700;
+  }
+
+  .container-bp {
+    @apply mx-auto w-full max-w-[76rem] px-5 sm:px-8 lg:px-10;
+  }
+
+  /* Faint technical grid used behind hero + dashboards */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .num {
+    @apply font-mono tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
