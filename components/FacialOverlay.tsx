@@ -168,7 +168,7 @@ export function FacialOverlay({
       <div className="relative flex justify-center overflow-hidden rounded-2xl border border-line bg-ink-900 p-2">
         <canvas
           ref={canvasRef}
-          className="block h-auto max-h-[560px] w-auto max-w-full rounded-xl"
+          className="block h-auto max-h-[38vh] w-auto max-w-full rounded-xl sm:max-h-[52vh] lg:max-h-[560px]"
         />
         <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-2 rounded-full border border-line bg-ink-950/70 px-3 py-1 backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
@@ -180,7 +180,7 @@ export function FacialOverlay({
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="hidden flex-col gap-2 lg:flex">
         <span className="label mb-1">Layers</span>
         {LAYERS.map((l) => (
           <label
