@@ -39,16 +39,51 @@ export function ResultsDashboard({
 
   return (
     <div className="animate-fade-in">
-      {/* ---- Profile header ---- */}
-      <div className="card grid gap-6 p-7 sm:gap-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:items-center">
+      {/* ---- Profile header (mobile) ----
+           Rating, photo, title and description are packed together and kept
+           compact so they all fit on one screen. Shown below lg only. */}
+      <div className="card p-5 lg:hidden">
+        <div className="flex items-start gap-4">
+          <div className="shrink-0">
+            <ScoreRing
+              score={result.overallScore}
+              confidence={result.overallConfidence}
+              size={128}
+            />
+          </div>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <Eyebrow>Your BP CLUB Profile</Eyebrow>
+              {result.isDemo && (
+                <span className="rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-label text-accent-soft">
+                  Demo
+                </span>
+              )}
+            </div>
+            <h1 className={cx("mt-1 text-3xl font-semibold uppercase leading-none tracking-tightest", TIER_TONE[tier.tone])}>
+              {tier.name}
+            </h1>
+            <p className="mt-2 text-sm font-medium text-fg">{tier.desc}</p>
+          </div>
+        </div>
+        <div className="mt-4">
+          <FacialOverlay imageUrl={imageUrl} overlay={result.overlay} isDemo={result.isDemo} />
+        </div>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button onClick={onRestart} className="btn-ghost">Analyze another photo</button>
+          <button
+            onClick={onDelete}
+            className="btn border border-signal-low/30 text-signal-low hover:bg-signal-low/10"
+          >
+            Delete my analysis
+          </button>
+        </div>
+      </div>
+
+      {/* ---- Profile header (desktop) ---- */}
+      <div className="card hidden gap-8 p-10 lg:grid lg:grid-cols-[auto_1fr] lg:items-center">
         <div className="flex justify-center">
           <ScoreRing score={result.overallScore} confidence={result.overallConfidence} />
-        </div>
-        {/* On mobile, show the rated photo right beside the score so the
-            rating and the photo it came from stay on the same screen. Hidden
-            on desktop, which uses the full Facial Map section further down. */}
-        <div className="lg:hidden">
-          <FacialOverlay imageUrl={imageUrl} overlay={result.overlay} isDemo={result.isDemo} />
         </div>
         <div>
           <div className="flex flex-wrap items-center gap-3">
