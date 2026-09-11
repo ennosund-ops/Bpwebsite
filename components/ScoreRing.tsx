@@ -21,6 +21,9 @@ export function ScoreRing({
   const center = size / 2;
   const gradId = `ringGrad-${size}`;
   const C = 2 * Math.PI * R;
+  // On the small (mobile) ring the two-line caption crowds the arc, so we
+  // show just the number there and keep the caption on the larger ring.
+  const showCaption = size >= 150;
 
   useEffect(() => {
     let raf = 0;
@@ -73,18 +76,7 @@ export function ScoreRing({
           >
             {val}
           </span>
-          <span
-            className="mt-2 font-mono uppercase leading-tight tracking-[0.18em] text-fg-faint"
-            style={{ fontSize: Math.max(8, size * 0.045) }}
-          >
-            Facial Analysis
-            <br />
-            Score
-          </span>
-        </div>
-      </div>
-      <ConfidenceBadge confidence={confidence} />
-    </div>
-  );
-}
-
+          {showCaption && (
+            <span
+              className="mt-2 font-mono uppercase leading-tight tracking-[0.18em] text-fg-faint"
+              style={{ fontSize: Mat
